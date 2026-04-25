@@ -62,9 +62,9 @@ def print_summary(intake: Nutrient, target: Nutrient) -> None:
 def daily_recommended(n: float = 1) -> Nutrient:
     return Nutrient(
         calories=2500,
-        protein=100,
+        protein=130,
         carbs=300,
-        fat=60,
+        fat=65,
         fiber=30,
         vitamin_a_mcg=900,
         vitamin_c_mg=100,
@@ -95,9 +95,9 @@ def daily_recommended(n: float = 1) -> Nutrient:
 
 def supplements(n: float = 1) -> Nutrient:
     return Nutrient(
-        vitamin_d_mcg=16,
-        vitamin_k_mcg=60,
-        calcium_mg=666,
+        vitamin_d_mcg=16 * 2 / 3,
+        vitamin_k_mcg=60 * 2 / 3,
+        calcium_mg=666 * 2 / 3,
         sodium_mg=1000,
         fat=10,
     ) * n
@@ -199,6 +199,53 @@ def bananas_100g(n: float = 1) -> Nutrient:
     ) * n
 
 
+def kiwifruit_zespri_100g(n: float = 1) -> Nutrient:
+    # https://fdc.nal.usda.gov/food-details/168211/nutrients
+    return Nutrient(
+        calories=63,
+        protein=1.02,
+        carbs=15.8,
+        fiber=1.4,
+        vitamin_c_mg=161,
+        vitamin_e_mg=1.4,
+        vitamin_k_mcg=6.1,
+        vitamin_b2_mg=0.074,
+        vitamin_b5_mg=0.12,
+        vitamin_b6_mg=0.079,
+        vitamin_b9_mcg=31,
+        vitamin_b12_mcg=0.08,
+        copper_mg=0.151,
+        magnesium_mg=12,
+        phosphorus_mg=25,
+        potassium_mg=315,
+    ) * n
+
+
+def tomatoes_100g(n: float = 1) -> Nutrient:
+    # https://fdc.nal.usda.gov/food-details/170457/nutrients
+    return Nutrient(
+        calories=18,
+        protein=0.88,
+        carbs=3.89,
+        fiber=1.2,
+        vitamin_a_mcg=42,
+        vitamin_c_mg=13.7,
+        vitamin_e_mg=0.54,
+        vitamin_k_mcg=7.9,
+        vitamin_b1_mg=0.037,
+        vitamin_b2_mg=0.019,
+        vitamin_b3_mg=0.594,
+        vitamin_b5_mg=0.089,
+        vitamin_b6_mg=0.08,
+        vitamin_b9_mcg=15,
+        copper_mg=0.059,
+        iron_mg=0.27,
+        magnesium_mg=11,
+        phosphorus_mg=24,
+        potassium_mg=237,
+    ) * n
+
+
 def carrots_100g(n: float = 1) -> Nutrient:
     # https://fdc.nal.usda.gov/food-details/170393/nutrients
     return Nutrient(
@@ -223,6 +270,35 @@ def carrots_100g(n: float = 1) -> Nutrient:
         phosphorus_mg=35,
         potassium_mg=320,
         sodium_mg=69,
+    ) * n
+
+
+def sweet_potatoes_100g(n: float = 1) -> Nutrient:
+    # https://fdc.nal.usda.gov/food-details/168484/nutrients
+    return Nutrient(
+        calories=76,
+        protein=1.37,
+        carbs=17.7,
+        fiber=2.5,
+        vitamin_a_mcg=787,
+        vitamin_c_mg=12.8,
+        vitamin_e_mg=0.94,
+        vitamin_k_mcg=2.1,
+        vitamin_b1_mg=0.056,
+        vitamin_b2_mg=0.047,
+        vitamin_b3_mg=0.538,
+        vitamin_b5_mg=0.581,
+        vitamin_b6_mg=0.165,
+        vitamin_b9_mcg=6,
+        choline_mg=10.8,
+        calcium_mg=27,
+        copper_mg=0.094,
+        iron_mg=0.72,
+        magnesium_mg=18,
+        phosphorus_mg=32,
+        potassium_mg=230,
+        sodium_mg=27,
+        zinc_mg=0.2,
     ) * n
 
 
@@ -252,31 +328,6 @@ def broccoli_100g(n: float = 1) -> Nutrient:
         potassium_mg=316,
         selenium_mcg=2.5,
         zinc_mg=0.41,
-    ) * n
-
-
-def tomatoes_100g(n: float = 1) -> Nutrient:
-    # https://fdc.nal.usda.gov/food-details/170457/nutrients
-    return Nutrient(
-        calories=18,
-        protein=0.88,
-        carbs=3.89,
-        fiber=1.2,
-        vitamin_a_mcg=42,
-        vitamin_c_mg=13.7,
-        vitamin_e_mg=0.54,
-        vitamin_k_mcg=7.9,
-        vitamin_b1_mg=0.037,
-        vitamin_b2_mg=0.019,
-        vitamin_b3_mg=0.594,
-        vitamin_b5_mg=0.089,
-        vitamin_b6_mg=0.08,
-        vitamin_b9_mcg=15,
-        copper_mg=0.059,
-        iron_mg=0.27,
-        magnesium_mg=11,
-        phosphorus_mg=24,
-        potassium_mg=237,
     ) * n
 
 
@@ -406,8 +457,8 @@ def peppers_sweet_yellow_100g(n: float = 1) -> Nutrient:
 def chicken_breast_100g(n: float = 1) -> Nutrient:
     # https://fdc.nal.usda.gov/food-details/171477/nutrientsdd
     return Nutrient(
-        calories=93,
-        protein=21,
+        calories=94,
+        protein=21.2,
         fat=0.9,
         vitamin_b1_mg=0.07,
         vitamin_b2_mg=0.114,
@@ -424,7 +475,7 @@ def chicken_breast_100g(n: float = 1) -> Nutrient:
         phosphorus_mg=228,
         potassium_mg=256,
         selenium_mcg=27.6,
-        sodium_mg=74,
+        sodium_mg=328,
         zinc_mg=1,
     ) * n
 
@@ -568,25 +619,14 @@ def seaweed_snack(n: float = 1) -> Nutrient:
     ) * n
 
 
-def kiwifruit_zespri_100g(n: float = 1) -> Nutrient:
-    # https://fdc.nal.usda.gov/food-details/168211/nutrients
+def bread_milk_high_calcium_100g(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=63,
-        protein=1.02,
-        carbs=15.8,
-        fiber=1.4,
-        vitamin_c_mg=161,
-        vitamin_e_mg=1.4,
-        vitamin_k_mcg=6.1,
-        vitamin_b2_mg=0.074,
-        vitamin_b5_mg=0.12,
-        vitamin_b6_mg=0.079,
-        vitamin_b9_mcg=31,
-        vitamin_b12_mcg=0.08,
-        copper_mg=0.151,
-        magnesium_mg=12,
-        phosphorus_mg=25,
-        potassium_mg=315,
+        calories=314,
+        protein=11.1,
+        carbs=51,
+        fat=7,
+        calcium_mg=265,
+        sodium_mg=310,
     ) * n
 
 
@@ -595,14 +635,12 @@ if __name__ == '__main__':
     other = supplements(1) + milk_nonfat_100g(2) + seaweed_snack(0.075)
 
     regular_lunch = rice_mixed_100g(0.8) + salmon_100g(2) + carrots_100g(2) + asparagus_100g(1)
-    regular_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(1.8) + broccoli_100g(1.5) + kiwifruit_zespri_100g(1)
+    regular_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(0.9) + broccoli_100g(1.5) + kiwifruit_zespri_100g(1)
     regular_day = breakfast + other + regular_lunch + regular_dinner
 
-    workout_lunch1 = (steak_lean_100g(2) + nuts_mixed_100g(0.25) + arugula_100g(1) +
-                      peppers_sweet_green_100g(0.5) + peppers_sweet_red_100g(0.5) + peppers_sweet_yellow_100g(0.5))
-    workout_lunch2 = chicken_breast_100g(1.8) + nuts_mixed_100g(0.25) + arugula_100g(1) + tomatoes_100g(2)
-    workout_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(1.8) + bananas_100g(1.5)
-    workout_day = breakfast + other + workout_lunch1 * (2 / 3) + workout_lunch2 * (1 / 3) + workout_dinner
+    workout_lunch = sweet_potatoes_100g(1.5) + steak_lean_100g(1.8) + nuts_mixed_100g(0.25) + arugula_100g(1)
+    workout_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(1.8) + bananas_100g(1.5) + bread_milk_high_calcium_100g(1)
+    workout_day = breakfast + other + workout_lunch + workout_dinner
 
     # print_summary(regular_day, daily_recommended())
     # print_summary(workout_day, daily_recommended())
