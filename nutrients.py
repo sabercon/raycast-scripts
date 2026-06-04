@@ -632,14 +632,14 @@ def bread_milk_high_calcium_100g(n: float = 1) -> Nutrient:
 
 if __name__ == '__main__':
     breakfast = oats_probiotics_100g(0.4) + egg_poached_100g(1) + blueberries_100g(1)
-    other = supplements(1) + milk_nonfat_100g(2) + seaweed_snack(0.075)
+    other = supplements(1) + milk_nonfat_100g(2)
 
-    regular_lunch = rice_mixed_100g(0.8) + salmon_100g(2) + carrots_100g(2) + asparagus_100g(1)
-    regular_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(0.9) + broccoli_100g(1.5) + kiwifruit_zespri_100g(1)
+    regular_lunch = rice_mixed_100g(0.8) + salmon_100g(2) + carrots_100g(2)
+    regular_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(0.9) + kiwifruit_zespri_100g(1)
     regular_day = breakfast + other + regular_lunch + regular_dinner
 
-    workout_lunch = sweet_potatoes_100g(1.5) + steak_lean_100g(1.8) + nuts_mixed_100g(0.25) + arugula_100g(1)
-    workout_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(1.8) + bananas_100g(1.5) + bread_milk_high_calcium_100g(1)
+    workout_lunch = sweet_potatoes_100g(1.5) + steak_lean_100g(1.8) + arugula_100g(1) + nuts_mixed_100g(0.25)
+    workout_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(0.9) + seaweed_snack(0.075) + bananas_100g(1.5)
     workout_day = breakfast + other + workout_lunch + workout_dinner
 
     # print_summary(regular_day, daily_recommended())
