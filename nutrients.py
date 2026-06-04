@@ -605,17 +605,18 @@ def oats_probiotics_100g(n: float = 1) -> Nutrient:
 
 def seaweed_snack(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=565,
-        protein=26.5,
-        fat=46.8,
-        fiber=18.8,
-        vitamin_e_mg=15,
-        calcium_mg=512,
+        calories=545,
+        protein=22.8,
+        fat=43.1,
+        fiber=19.1,
+        vitamin_e_mg=22.9,
         iodine_mcg=2000,
-        iron_mg=7.8,
-        magnesium_mg=222,
-        sodium_mg=512,
-        zinc_mg=3.74,
+        iron_mg=4.6,
+        magnesium_mg=242,
+        potassium_mg=1540,
+        selenium_mcg=6.8,
+        sodium_mg=679,
+        zinc_mg=2.58,
     ) * n
 
 
