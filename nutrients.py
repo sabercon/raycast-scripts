@@ -352,6 +352,32 @@ def asparagus_100g(n: float = 1) -> Nutrient:
         zinc_mg=0.6,
     ) * n
 
+def lettuce_100g(n: float = 1) -> Nutrient:
+    # https://fdc.nal.usda.gov/food-details/169247/nutrients
+    return Nutrient(
+        calories=17,
+        protein=1.23,
+        carbs=3.29,
+        fiber=2.1,
+        vitamin_a_mcg=436,
+        vitamin_c_mg=4,
+        vitamin_e_mg=0.13,
+        vitamin_k_mcg=102,
+        vitamin_b1_mg=0.072,
+        vitamin_b2_mg=0.067,
+        vitamin_b3_mg=0.313,
+        vitamin_b5_mg=0.142,
+        vitamin_b6_mg=0.074,
+        vitamin_b9_mcg=136,
+        choline_mg=9.9,
+        calcium_mg=33,
+        copper_mg=0.048,
+        iron_mg=0.97,
+        magnesium_mg=14,
+        phosphorus_mg=30,
+        potassium_mg=247,
+        zinc_mg=0.23,
+    ) * n
 
 def arugula_100g(n: float = 1) -> Nutrient:
     # https://fdc.nal.usda.gov/food-details/169387/nutrients
@@ -639,7 +665,7 @@ if __name__ == '__main__':
     regular_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(0.9) + kiwifruit_zespri_100g(1)
     regular_day = breakfast + other + regular_lunch + regular_dinner
 
-    workout_lunch = sweet_potatoes_100g(1.5) + steak_lean_100g(1.8) + arugula_100g(1) + nuts_mixed_100g(0.25)
+    workout_lunch = sweet_potatoes_100g(1.5) + steak_lean_100g(1.8) + lettuce_100g(2) + nuts_mixed_100g(0.25)
     workout_dinner = rice_mixed_100g(0.8) + chicken_breast_100g(0.9) + seaweed_snack(0.075) + bananas_100g(1.5)
     workout_day = breakfast + other + workout_lunch + workout_dinner
 
