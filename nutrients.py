@@ -5,7 +5,6 @@ from typing import Self
 @dataclass(frozen=True)
 class Nutrient:
     # Macronutrient
-    calories: float = 0.0
     protein: float = 0.0
     carbs: float = 0.0
     fat: float = 0.0
@@ -38,6 +37,11 @@ class Nutrient:
     sodium_mg: float = 0.0  # Deficiency is rare
     zinc_mg: float = 0.0
 
+    @property
+    def calories(self) -> float:
+        # Atwater factors: 4 cal/g protein and carbs, 9 cal/g fat
+        return self.protein * 4 + self.carbs * 4 + self.fat * 9
+
     def __add__(self, other: Self) -> Self:
         return self.__class__(**{f.name: getattr(self, f.name) + getattr(other, f.name) for f in fields(self)})
 
@@ -49,19 +53,18 @@ class Nutrient:
 
 
 def print_summary(intake: Nutrient, target: Nutrient) -> None:
-    for field in fields(intake):
-        i = getattr(intake, field.name)
-        t = getattr(target, field.name)
+    for name in ['calories', *(f.name for f in fields(intake))]:
+        i = getattr(intake, name)
+        t = getattr(target, name)
         pct = i / t * 100
         color = '\033[32m' if pct >= 100 else '\033[34m' if pct >= 80 else '\033[31m'
         reset = '\033[0m'
-        print(f'{field.name}: {color}{i:g}/{t:g} ({pct:.1f}%){reset}')
+        print(f'{name}: {color}{i:g}/{t:g} ({pct:.1f}%){reset}')
 
 
 def daily_recommended(n: float = 1) -> Nutrient:
     # https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator
     return Nutrient(
-        calories=2200,
         protein=120,  # 1.8g/kg, 4 calories per gram
         carbs=300,  # 4 calories per gram
         fat=65,  # 9 calories per gram
@@ -102,7 +105,6 @@ def supplements(n: float = 1) -> Nutrient:
 
 def protein_powder_100g(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=372,
         protein=88,
         carbs=2.8,
         fat=0.4,
@@ -117,7 +119,6 @@ def protein_powder_100g(n: float = 1) -> Nutrient:
 def eggs_hard_boiled_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/173424
     return Nutrient(
-        calories=155,
         protein=12.6,
         carbs=1.1,
         fat=10.6,
@@ -149,7 +150,6 @@ def eggs_hard_boiled_100g(n: float = 1) -> Nutrient:
 def milk_skim_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/171269
     return Nutrient(
-        calories=38,
         protein=3.6,
         carbs=5.1,
         vitamin_b1_mg=0.05,
@@ -174,7 +174,6 @@ def milk_skim_100g(n: float = 1) -> Nutrient:
 def blueberries_frozen_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/173950
     return Nutrient(
-        calories=51,
         protein=0.42,
         carbs=12.2,
         fiber=2.7,
@@ -200,7 +199,6 @@ def blueberries_frozen_100g(n: float = 1) -> Nutrient:
 def bananas_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/173944
     return Nutrient(
-        calories=89,
         protein=1.1,
         carbs=22.8,
         fiber=2.6,
@@ -224,7 +222,6 @@ def bananas_100g(n: float = 1) -> Nutrient:
 def kiwifruit_zespri_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/168211
     return Nutrient(
-        calories=63,
         protein=1.02,
         carbs=15.8,
         fiber=1.4,
@@ -247,7 +244,6 @@ def kiwifruit_zespri_100g(n: float = 1) -> Nutrient:
 def carrots_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/170393
     return Nutrient(
-        calories=41,
         protein=0.93,
         carbs=9.6,
         fiber=2.8,
@@ -275,7 +271,6 @@ def carrots_100g(n: float = 1) -> Nutrient:
 def broccoli_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/170379
     return Nutrient(
-        calories=34,
         protein=2.8,
         carbs=6.6,
         fiber=2.6,
@@ -303,7 +298,6 @@ def broccoli_100g(n: float = 1) -> Nutrient:
 def chicken_breast_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/171077
     return Nutrient(
-        calories=94,
         protein=21.2,
         fat=0.9,
         vitamin_a_mcg=9,
@@ -329,7 +323,6 @@ def chicken_breast_100g(n: float = 1) -> Nutrient:
 def salmon_farmed_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/175167
     return Nutrient(
-        calories=263,
         protein=17.8,
         fat=21.6,
         vitamin_a_mcg=58,
@@ -356,7 +349,6 @@ def salmon_farmed_100g(n: float = 1) -> Nutrient:
 
 def nuts_mixed_100g(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=668.5,
         protein=19.3,
         carbs=10.8,
         fat=60.5,
@@ -372,7 +364,6 @@ def nuts_mixed_100g(n: float = 1) -> Nutrient:
 
 def rice_mixed_100g(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=348.7,
         protein=10,
         carbs=67.4,
         fat=2.3,
@@ -388,7 +379,6 @@ def rice_mixed_100g(n: float = 1) -> Nutrient:
 
 def oats_probiotics_100g(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=382,
         protein=8,
         carbs=56.8,
         fat=11.5,
@@ -402,7 +392,6 @@ def oats_probiotics_100g(n: float = 1) -> Nutrient:
 
 def seaweed_snack(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=545,
         protein=22.8,
         fat=43.1,
         fiber=19.1,
@@ -431,7 +420,6 @@ def common_vegetable_100g(n: float = 1) -> Nutrient:
 
 def common_meal(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=700,
         protein=30,
         carbs=90,
         fat=25,
