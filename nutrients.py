@@ -1,5 +1,10 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 from typing import Self
+
+
+def _untracked() -> float:
+    # Deficiency is rare, so this field is excluded from the summary
+    return field(default=0.0, metadata={'untracked': True})
 
 
 @dataclass(frozen=True)
@@ -14,27 +19,27 @@ class Nutrient:
     vitamin_a_mcg: float = 0.0
     vitamin_c_mg: float = 0.0
     vitamin_d_mcg: float = 0.0
-    vitamin_e_mg: float = 0.0  # Deficiency is rare
-    vitamin_k_mcg: float = 0.0  # Deficiency is rare
+    vitamin_e_mg: float = _untracked()
+    vitamin_k_mcg: float = _untracked()
     vitamin_b1_mg: float = 0.0  # Thiamine
     vitamin_b2_mg: float = 0.0  # Riboflavin
-    vitamin_b3_mg: float = 0.0  # Niacin. Deficiency is rare
-    vitamin_b5_mg: float = 0.0  # Pantothenic Acid. Deficiency is rare
+    vitamin_b3_mg: float = _untracked()  # Niacin
+    vitamin_b5_mg: float = _untracked()  # Pantothenic Acid
     vitamin_b6_mg: float = 0.0  # Pyridoxine
-    vitamin_b7_mcg: float = 0.0  # Biotin. Deficiency is rare
+    vitamin_b7_mcg: float = _untracked()  # Biotin
     vitamin_b9_mcg: float = 0.0  # Folate
-    vitamin_b12_mcg: float = 0.0  # Cobalamin. Deficiency is rare
-    choline_mg: float = 0.0  # Deficiency is rare
+    vitamin_b12_mcg: float = _untracked()  # Cobalamin
+    choline_mg: float = _untracked()
 
     # Mineral
     calcium_mg: float = 0.0
     iodine_mcg: float = 0.0
     iron_mg: float = 0.0
     magnesium_mg: float = 0.0
-    phosphorus_mg: float = 0.0  # Deficiency is rare
+    phosphorus_mg: float = 0.0 # The less, the better
     potassium_mg: float = 0.0
-    selenium_mcg: float = 0.0  # Deficiency is rare
-    sodium_mg: float = 0.0  # Deficiency is rare
+    selenium_mcg: float = _untracked()
+    sodium_mg: float = 0.0 # The less, the better
     zinc_mg: float = 0.0
 
     @property
@@ -53,7 +58,8 @@ class Nutrient:
 
 
 def print_summary(intake: Nutrient, target: Nutrient) -> None:
-    for name in ['calories', *(f.name for f in fields(intake))]:
+    shown = [f.name for f in fields(intake) if not f.metadata.get('untracked')]
+    for name in ['calories', *shown]:
         i = getattr(intake, name)
         t = getattr(target, name)
         pct = i / t * 100
