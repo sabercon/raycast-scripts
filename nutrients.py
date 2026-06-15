@@ -36,10 +36,10 @@ class Nutrient:
     iodine_mcg: float = 0.0
     iron_mg: float = 0.0
     magnesium_mg: float = 0.0
-    phosphorus_mg: float = 0.0 # The less, the better
+    phosphorus_mg: float = 0.0  # The less, the better
     potassium_mg: float = 0.0
     selenium_mcg: float = _untracked()
-    sodium_mg: float = 0.0 # The less, the better
+    sodium_mg: float = 0.0  # The less, the better
     zinc_mg: float = 0.0
 
     @property
@@ -71,9 +71,9 @@ def print_summary(intake: Nutrient, target: Nutrient) -> None:
 def daily_recommended(n: float = 1) -> Nutrient:
     # https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator
     return Nutrient(
-        protein=120,  # 1.8g/kg, 4 calories per gram
-        carbs=300,  # 4 calories per gram
-        fat=65,  # 9 calories per gram
+        protein=120,  # 2g/kg
+        carbs=250,  # 4g/kg
+        fat=60,  # 1g/kg
         fiber=30,
         vitamin_a_mcg=900,
         vitamin_c_mg=100,
@@ -412,25 +412,19 @@ def seaweed_snack(n: float = 1) -> Nutrient:
     ) * n
 
 
-def common_vegetable_100g(n: float = 1) -> Nutrient:
-    return Nutrient(
-        fiber=1.5,
-        vitamin_a_mcg=100,
-        vitamin_c_mg=20,
-        vitamin_b9_mcg=50,
-        calcium_mg=80,
-        magnesium_mg=20,
-        potassium_mg=200,
-    ) * n
-
-
 def common_meal(n: float = 1) -> Nutrient:
     return Nutrient(
         protein=30,
         carbs=90,
         fat=25,
         fiber=4,
+        vitamin_b9_mcg=50,
+        calcium_mg=100,
+        iron_mg=2,
+        magnesium_mg=100,
+        potassium_mg=500,
         sodium_mg=1000,
+        zinc_mg=3,
     ) * n
 
 
