@@ -15,27 +15,27 @@ class Nutrient:
     vitamin_a_mcg: float = 0.0
     vitamin_c_mg: float = 0.0
     vitamin_d_mcg: float = 0.0
-    vitamin_e_mg: float = 0.0
-    vitamin_k_mcg: float = 0.0
+    vitamin_e_mg: float = 0.0  # Deficiency is rare
+    vitamin_k_mcg: float = 0.0  # Deficiency is rare
     vitamin_b1_mg: float = 0.0  # Thiamine
     vitamin_b2_mg: float = 0.0  # Riboflavin
-    vitamin_b3_mg: float = 0.0  # Niacin
-    vitamin_b5_mg: float = 0.0  # Pantothenic Acid
+    vitamin_b3_mg: float = 0.0  # Niacin. Deficiency is rare
+    vitamin_b5_mg: float = 0.0  # Pantothenic Acid. Deficiency is rare
     vitamin_b6_mg: float = 0.0  # Pyridoxine
-    vitamin_b7_mcg: float = 0.0  # Biotin
+    vitamin_b7_mcg: float = 0.0  # Biotin. Deficiency is rare
     vitamin_b9_mcg: float = 0.0  # Folate
-    vitamin_b12_mcg: float = 0.0  # Cobalamin
-    choline_mg: float = 0.0
+    vitamin_b12_mcg: float = 0.0  # Cobalamin. Deficiency is rare
+    choline_mg: float = 0.0  # Deficiency is rare
 
     # Mineral
     calcium_mg: float = 0.0
     iodine_mcg: float = 0.0
     iron_mg: float = 0.0
     magnesium_mg: float = 0.0
-    phosphorus_mg: float = 0.0
+    phosphorus_mg: float = 0.0  # Deficiency is rare
     potassium_mg: float = 0.0
-    selenium_mcg: float = 0.0
-    sodium_mg: float = 0.0
+    selenium_mcg: float = 0.0  # Deficiency is rare
+    sodium_mg: float = 0.0  # Deficiency is rare
     zinc_mg: float = 0.0
 
     def __add__(self, other: Self) -> Self:
@@ -422,9 +422,6 @@ def common_vegetable_100g(n: float = 1) -> Nutrient:
         fiber=1.5,
         vitamin_a_mcg=100,
         vitamin_c_mg=20,
-        vitamin_k_mcg=100,
-        vitamin_b1_mg=0.05,
-        vitamin_b2_mg=0.1,
         vitamin_b9_mcg=50,
         calcium_mg=80,
         magnesium_mg=20,
@@ -434,28 +431,27 @@ def common_vegetable_100g(n: float = 1) -> Nutrient:
 
 def common_meal(n: float = 1) -> Nutrient:
     return Nutrient(
-        calories=600,
-        protein=25,
-        carbs=80,
-        fat=20,
-        fiber=2,
+        calories=700,
+        protein=30,
+        carbs=90,
+        fat=25,
+        fiber=4,
         sodium_mg=1000,
     ) * n
 
 
 if __name__ == '__main__':
-    breakfast = oats_probiotics_100g(0.4) + eggs_hard_boiled_100g(1) + blueberries_frozen_100g(1)
-    other = supplements(1) + milk_skim_100g(2)
+    breakfast = oats_probiotics_100g(0.4) + eggs_hard_boiled_100g(1) + blueberries_frozen_100g(1) + supplements(1)
 
-    regular_lunch = rice_mixed_100g(0.9) + salmon_farmed_100g(2) + carrots_100g(2) + Nutrient(sodium_mg=1600*0.2)
+    regular_lunch = rice_mixed_100g(0.9) + salmon_farmed_100g(2) + carrots_100g(2) + Nutrient(sodium_mg=1600) * 0.2
     regular_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + broccoli_100g(1.5)
-    regular_other = kiwifruit_zespri_100g(1)
-    regular_day = breakfast + other + regular_lunch + regular_dinner + regular_other
+    regular_other = milk_skim_100g(2) + kiwifruit_zespri_100g(1)
+    regular_day = breakfast + regular_lunch + regular_dinner + regular_other
 
-    workout_lunch = nuts_mixed_100g(0.25)
+    workout_lunch = common_meal(1)
     workout_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + seaweed_snack(0.075)
-    workout_other = bananas_100g(2) + protein_powder_100g(0.3)
-    workout_day = breakfast + other + workout_lunch + workout_dinner + workout_other
+    workout_other = milk_skim_100g(2) + nuts_mixed_100g(0.25) + bananas_100g(2) + protein_powder_100g(0.3)
+    workout_day = breakfast + workout_lunch + workout_dinner + workout_other
 
     # print_summary(regular_day, daily_recommended())
     # print_summary(workout_day, daily_recommended())
