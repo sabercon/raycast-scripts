@@ -57,8 +57,8 @@ class Nutrient:
         return self.__mul__(factor)
 
 
-def print_summary(intake: Nutrient, target: Nutrient) -> None:
-    shown = [f.name for f in fields(intake) if not f.metadata.get('untracked')]
+def print_summary(intake: Nutrient, target: Nutrient, show_untracked: bool = False) -> None:
+    shown = [f.name for f in fields(intake) if show_untracked or not f.metadata.get('untracked')]
     for name in ['calories', *shown]:
         i = getattr(intake, name)
         t = getattr(target, name)
@@ -443,4 +443,5 @@ if __name__ == '__main__':
 
     # print_summary(regular_day, daily_recommended())
     # print_summary(workout_day, daily_recommended())
-    print_summary(regular_day * (2 / 5) + workout_day * (3 / 5), daily_recommended())
+    # print_summary(regular_day * (2 / 5) + workout_day * (3 / 5), daily_recommended(), show_untracked=True)
+    print_summary(regular_day * (2 / 5) + workout_day * (3 / 5), daily_recommended(), show_untracked=False)
