@@ -429,7 +429,7 @@ def common_meal(n: float = 1) -> Nutrient:
 
 
 if __name__ == '__main__':
-    breakfast = oats_probiotics_100g(0.4) + eggs_hard_boiled_100g(1) + blueberries_frozen_100g(1) + supplements(1)
+    breakfast = oats_probiotics_100g(0.4) + eggs_hard_boiled_100g(1) + blueberries_frozen_100g(0.9) + supplements(1)
 
     regular_lunch = rice_mixed_100g(0.9) + salmon_farmed_100g(2) + carrots_100g(2) + Nutrient(sodium_mg=1600) * 0.2
     regular_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + broccoli_100g(1.5)
