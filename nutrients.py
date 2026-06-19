@@ -374,6 +374,7 @@ def rice_mixed_100g(n: float = 1) -> Nutrient:
         carbs=67.4,
         fat=2.3,
         fiber=7.3,
+        vitamin_b1_mg=0.3,
         calcium_mg=36,
         iron_mg=1.9,
         magnesium_mg=81,
@@ -389,6 +390,7 @@ def oats_probiotics_100g(n: float = 1) -> Nutrient:
         carbs=56.8,
         fat=11.5,
         fiber=9,
+        vitamin_b1_mg=0.2,
         magnesium_mg=94,
         phosphorus_mg=186,
         potassium_mg=468,
@@ -415,16 +417,16 @@ def seaweed_snack(n: float = 1) -> Nutrient:
 def common_meal(n: float = 1) -> Nutrient:
     return Nutrient(
         protein=30,
-        carbs=90,
-        fat=25,
-        fiber=4,
+        carbs=80,
+        fat=20,
+        fiber=5,
         vitamin_b9_mcg=50,
         calcium_mg=100,
-        iron_mg=2,
+        iron_mg=4,
         magnesium_mg=100,
-        potassium_mg=500,
+        potassium_mg=800,
         sodium_mg=1000,
-        zinc_mg=3,
+        zinc_mg=4,
     ) * n
 
 
