@@ -437,7 +437,7 @@ if __name__ == '__main__':
     regular_day = breakfast + regular_lunch + regular_dinner + regular_other
 
     workout_lunch = common_meal(1)
-    workout_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + seaweed_snack(0.075)
+    workout_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + seaweed_snack(0.05)
     workout_other = milk_skim_100g(2) + nuts_mixed_100g(0.25) + bananas_100g(2) + protein_powder_100g(0.3)
     workout_day = breakfast + workout_lunch + workout_dinner + workout_other
 
