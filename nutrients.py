@@ -330,7 +330,7 @@ def salmon_farmed_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/175167
     return Nutrient(
         protein=17.8,
-        fat=21.6,
+        fat=16.4,
         vitamin_a_mcg=58,
         vitamin_d_mcg=11,
         vitamin_e_mg=3.6,
@@ -348,7 +348,7 @@ def salmon_farmed_100g(n: float = 1) -> Nutrient:
         phosphorus_mg=240,
         potassium_mg=363,
         selenium_mcg=24,
-        sodium_mg=100,
+        sodium_mg=222,
         zinc_mg=0.36,
     ) * n
 
