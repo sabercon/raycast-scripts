@@ -301,6 +301,32 @@ def broccoli_100g(n: float = 1) -> Nutrient:
     ) * n
 
 
+def peppers_sweet_red_100g(n: float = 1) -> Nutrient:
+    # https://tools.myfooddata.com/nutrition-facts/170108
+    return Nutrient(
+        protein=0.99,
+        carbs=6,
+        fiber=2.1,
+        vitamin_a_mcg=157,
+        vitamin_c_mg=127.7,
+        vitamin_e_mg=1.6,
+        vitamin_k_mcg=4.9,
+        vitamin_b1_mg=0.05,
+        vitamin_b2_mg=0.09,
+        vitamin_b3_mg=0.98,
+        vitamin_b5_mg=0.32,
+        vitamin_b6_mg=0.29,
+        vitamin_b9_mcg=46,
+        choline_mg=5.6,
+        calcium_mg=7,
+        iron_mg=0.43,
+        magnesium_mg=12,
+        phosphorus_mg=26,
+        potassium_mg=211,
+        zinc_mg=0.25,
+    ) * n
+
+
 def chicken_breast_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/171077
     return Nutrient(
@@ -419,14 +445,14 @@ def common_meal(n: float = 1) -> Nutrient:
         protein=30,
         carbs=80,
         fat=20,
-        fiber=5,
+        fiber=2,
         vitamin_b9_mcg=50,
-        calcium_mg=100,
-        iron_mg=4,
-        magnesium_mg=100,
-        potassium_mg=800,
+        calcium_mg=50,
+        iron_mg=2,
+        magnesium_mg=50,
+        potassium_mg=500,
         sodium_mg=1000,
-        zinc_mg=4,
+        zinc_mg=2,
     ) * n
 
 
@@ -434,11 +460,11 @@ if __name__ == '__main__':
     breakfast = oats_probiotics_100g(0.4) + eggs_hard_boiled_100g(1) + blueberries_frozen_100g(0.9) + supplements(1)
 
     regular_lunch = rice_mixed_100g(0.9) + salmon_farmed_100g(2) + carrots_100g(2) + Nutrient(sodium_mg=1600) * 0.2
-    regular_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + broccoli_100g(1.5)
+    regular_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + peppers_sweet_red_100g(1.5) + nuts_mixed_100g(0.25)
     regular_other = milk_skim_100g(2) + kiwifruit_zespri_100g(1)
     regular_day = breakfast + regular_lunch + regular_dinner + regular_other
 
-    workout_lunch = common_meal(1)
+    workout_lunch = common_meal(1) + broccoli_100g(1.5)
     workout_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + seaweed_snack(0.05)
     workout_other = milk_skim_100g(2) + nuts_mixed_100g(0.25) + bananas_100g(2) + protein_powder_100g(0.3)
     workout_day = breakfast + workout_lunch + workout_dinner + workout_other
