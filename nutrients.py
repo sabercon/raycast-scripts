@@ -72,7 +72,7 @@ def daily_recommended(n: float = 1) -> Nutrient:
     # https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator
     return Nutrient(
         protein=120,  # 2g/kg
-        carbs=250,  # 4g/kg
+        carbs=300,  # 4g/kg
         fat=60,  # 1g/kg
         fiber=30,
         vitamin_a_mcg=900,
@@ -180,7 +180,6 @@ def milk_skim_100g(n: float = 1) -> Nutrient:
 def blueberries_frozen_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/173950
     return Nutrient(
-        protein=0.42,
         carbs=12.2,
         fiber=2.7,
         vitamin_c_mg=2.5,
@@ -205,7 +204,6 @@ def blueberries_frozen_100g(n: float = 1) -> Nutrient:
 def bananas_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/173944
     return Nutrient(
-        protein=1.1,
         carbs=22.8,
         fiber=2.6,
         vitamin_c_mg=8.7,
@@ -228,7 +226,6 @@ def bananas_100g(n: float = 1) -> Nutrient:
 def kiwifruit_zespri_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/168211
     return Nutrient(
-        protein=1.02,
         carbs=15.8,
         fiber=1.4,
         vitamin_c_mg=161.3,
@@ -250,7 +247,6 @@ def kiwifruit_zespri_100g(n: float = 1) -> Nutrient:
 def carrots_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/170393
     return Nutrient(
-        protein=0.93,
         carbs=9.6,
         fiber=2.8,
         vitamin_a_mcg=835,
@@ -304,7 +300,6 @@ def broccoli_100g(n: float = 1) -> Nutrient:
 def peppers_sweet_red_100g(n: float = 1) -> Nutrient:
     # https://tools.myfooddata.com/nutrition-facts/170108
     return Nutrient(
-        protein=0.99,
         carbs=6,
         fiber=2.1,
         vitamin_a_mcg=157,
@@ -440,6 +435,16 @@ def seaweed_snack(n: float = 1) -> Nutrient:
     ) * n
 
 
+def bread(n: float = 1) -> Nutrient:
+    return Nutrient(
+        protein=13.4,
+        carbs=44.9,
+        fat=10.4,
+        calcium_mg=53,
+        sodium_mg=339,
+    ) * n
+
+
 def common_meal(n: float = 1) -> Nutrient:
     return Nutrient(
         protein=30,
@@ -459,14 +464,14 @@ def common_meal(n: float = 1) -> Nutrient:
 if __name__ == '__main__':
     breakfast = oats_probiotics_100g(0.4) + eggs_hard_boiled_100g(1) + blueberries_frozen_100g(0.9) + supplements(1)
 
-    regular_lunch = rice_mixed_100g(0.9) + salmon_farmed_100g(2) + carrots_100g(2) + Nutrient(sodium_mg=1600) * 0.2
+    regular_lunch = rice_mixed_100g(0.9) + salmon_farmed_100g(2) + carrots_100g(2) + Nutrient(sodium_mg=300)
     regular_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + peppers_sweet_red_100g(1.5) + nuts_mixed_100g(0.25)
-    regular_other = milk_skim_100g(2) + kiwifruit_zespri_100g(1)
+    regular_other = milk_skim_100g(2) + kiwifruit_zespri_100g(1) + bread(1.2)
     regular_day = breakfast + regular_lunch + regular_dinner + regular_other
 
-    workout_lunch = common_meal(1) + broccoli_100g(1.5)
+    workout_lunch = common_meal(1) + broccoli_100g(1) + Nutrient(sodium_mg=300)
     workout_dinner = rice_mixed_100g(0.9) + chicken_breast_100g(0.9) + seaweed_snack(0.05)
-    workout_other = milk_skim_100g(2) + nuts_mixed_100g(0.25) + bananas_100g(2) + protein_powder_100g(0.3)
+    workout_other = milk_skim_100g(2) + nuts_mixed_100g(0.25) + bananas_100g(2) + bread(1.2) + protein_powder_100g(0.3)
     workout_day = breakfast + workout_lunch + workout_dinner + workout_other
 
     # print_summary(regular_day, daily_recommended())
