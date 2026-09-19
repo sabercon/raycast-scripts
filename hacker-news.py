@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/opt/homebrew/Caskroom/miniconda/base/bin/python
 
 # Required parameters:
 # @raycast.schemaVersion 1
