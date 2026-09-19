@@ -1,4 +1,4 @@
-#!/opt/homebrew/anaconda3/bin/python
+#!/usr/bin/env python3
 
 # Required parameters:
 # @raycast.schemaVersion 1
@@ -17,10 +17,27 @@
 import sys
 import webbrowser
 from datetime import datetime, timedelta, timezone
+from html.parser import HTMLParser
 from urllib.parse import urljoin
+from urllib.request import Request, urlopen
 
-import requests
-from bs4 import BeautifulSoup
+
+class TitleLinkParser(HTMLParser):
+    """Collects the first <a href> inside each <span class="titleline">."""
+
+    def __init__(self):
+        super().__init__()
+        self.links = []
+        self._in_titleline = False
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'span' and attrs.get('class') == 'titleline':
+            self._in_titleline = True
+        elif tag == 'a' and self._in_titleline and 'href' in attrs:
+            self.links.append(attrs['href'])
+            self._in_titleline = False
+
 
 if len(sys.argv) == 1 or not sys.argv[1]:
     date = (datetime.now(timezone.utc) - timedelta(days=1.5)).strftime('%Y-%m-%d')
@@ -28,11 +45,12 @@ else:
     date = str(datetime.now(timezone.utc).year) + '-' + sys.argv[1][:2] + '-' + sys.argv[1][2:]
 url = f'https://news.ycombinator.com/front?day={date}'
 
-response = requests.get(url)
-response.raise_for_status()
+with urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0'})) as response:
+    html = response.read().decode('utf-8')
 
-soup = BeautifulSoup(response.text, 'html.parser')
-links = [span.find('a')['href'] for span in soup.find_all('span', class_='titleline')]
+parser = TitleLinkParser()
+parser.feed(html)
+links = parser.links
 
 for link in [url] + links:
     if link.startswith('item?id='):
